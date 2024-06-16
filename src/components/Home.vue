@@ -12,7 +12,7 @@
       @click:row="productClicked"
     ></v-data-table-server>
 
-    <h2>Orders</h2>
+    <!-- <h2>Orders</h2>
     <v-data-table-server
       v-model:items-per-page="itemsPerPage"
       :headers="productHeaders"
@@ -22,7 +22,7 @@
       item-value="name"
       @update:options="getOrder"
       @click:row="productClicked"
-    ></v-data-table-server>
+    ></v-data-table-server> -->
   </v-container>
 </template>
 <script>
@@ -39,7 +39,7 @@ export default {
     orders: [],
     productLoading: true,
     orderLoading: true,
-    totalProducts: 36,
+    totalProducts: 35,
     totalOrders: 36,
   }),
   methods: {
