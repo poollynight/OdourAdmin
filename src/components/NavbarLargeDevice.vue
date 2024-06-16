@@ -1,0 +1,119 @@
+<template>
+  <!-- Header -->
+  <div class="bg-red-darken-4 app-header" v-if="$vuetify.display.mdAndUp">
+    <!-- Top header -->
+    <v-row class="">
+      <v-container>
+        <v-row class="d-flex" align="center" justify="center">
+          <v-col class="text-center"><p>Nước hoa cho mọi tầng lớp</p></v-col>
+        </v-row>
+      </v-container>
+    </v-row>
+    <!-- Bottom header -->
+    <v-toolbar
+      class="v-toolbar v-toolbar--flat v-toolbar--density-default border-b v-theme--light v-locale--is-ltr v-app-bar border-b"
+    >
+      <v-container>
+        <v-row align="center">
+          <v-col
+            @click="backHome"
+            cols="3"
+            md="2"
+            class="text-red-darken-2 d-inline-flex justify-center text-h5"
+          >
+            <router-link
+              class="text-red-darken-2 text-decoration-none font-weight-bold"
+              to="/"
+            >
+              <p class="text-decoration-none font-weight-bold">ODOUR ADMIN</p>
+            </router-link>
+          </v-col>
+          <v-col cols="8"> </v-col>
+          <v-col
+            cols="2"
+            color="success"
+            class="col-3 d-flex justify-space-between"
+          >
+            <router-link
+              to="/login"
+              class="text-red-darken-2"
+              v-if="isLogin == false && $route.path !== '/login'"
+            >
+              Đăng nhập
+            </router-link>
+            <ProfileIcon v-if="isLogin"></ProfileIcon>
+
+            <router-link
+              to="/login"
+              class="text-decoration-none"
+              v-if="isLogin"
+            >
+            </router-link>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-toolbar>
+  </div>
+</template>
+<script>
+import ProfileIcon from "./NavbarProfileIcon.vue";
+export default {
+  components: {
+    ProfileIcon,
+  },
+  props: {
+    cartNumber: {
+      type: Number,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      // cartNumber: null,
+      tab: null,
+      isLogin: false,
+      navigatorLg: [
+        {
+          title: "Mua sắm",
+          value: "/shop?categoryId=0",
+        },
+        {
+          title: "Giới thiệu",
+          value: "/about",
+        },
+        {
+          title: "Liên hệ",
+          value: "/contact",
+        },
+      ],
+    };
+  },
+
+  methods: {
+    backHome() {
+      this.$refs.home.$el.click();
+    },
+    checkLogin() {
+      if (this.$cookies.get("ato")) {
+        this.isLogin = true;
+        this.checkConfirmEmail;
+      }
+    },
+  },
+  mounted() {
+    this.checkLogin();
+    // this.getCartFromAPI();
+  },
+};
+</script>
+<style>
+.tab {
+  font-size: 1em;
+}
+.brand-name {
+  font-size: 2rem;
+}
+.app-header {
+  z-index: 1010;
+}
+</style>
